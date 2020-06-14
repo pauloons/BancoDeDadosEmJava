@@ -6,11 +6,16 @@
 package view;
 
 import DAO.Conexao;
+import DAO.UsuarioDAO;
+import model.Usuario;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -114,16 +119,26 @@ public class FormCadastroView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            Connection conexao = new Conexao().getConnection();
-            String sql = ("insert into usuario(usuario,senha)values('tata','paulo');"); 
-            PreparedStatement statement = conexao.prepareStatement(sql);
-            statement.execute();
-            conexao.close();
-            // TODO add your handling code here:
-        } catch (SQLException ex) {
-            Logger.getLogger(FormCadastroView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
+    String nome = jTextField2.getText();
+    String senha = jTextField3.getText();
+    
+    	
+    Usuario usuario = new Usuario(nome,senha);
+    
+    try {
+		Connection conexao = new Conexao().getConnection();
+		 UsuarioDAO usuariodao = new UsuarioDAO(conexao); 
+		   usuariodao.insert(usuario);
+		   
+		   JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!!!");
+		   
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+    ;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
