@@ -5,17 +5,24 @@
  */
 package view;
 
+import java.sql.SQLException;
+
+import controller.LoginController;
+
+
 /**
  *
  * @author alexandre
  */
 public class LoginView extends javax.swing.JFrame {
 
-    /**
+    private LoginController controller;
+	/**
      * Creates new form LoginView
      */
     public LoginView() {
         initComponents();
+        controller = new LoginController(this);
     }
 
     /**
@@ -57,7 +64,12 @@ public class LoginView extends javax.swing.JFrame {
         jButton2.setText("Logar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                try {
+					jButton2ActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -118,15 +130,17 @@ public class LoginView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FormCadastroView telaDeCadastro = new FormCadastroView();
+        
+    	FormCadastroView telaDeCadastro = new FormCadastroView();
         telaDeCadastro.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        MenuView telaDeLogin = new MenuView();
-        telaDeLogin.setVisible(true);
+     
+controller.autenticar();
+      //controller.autenticar();
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -163,8 +177,28 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPasswordField getjPasswordField1() {
+		return jPasswordField1;
+	}
+
+	public void setjPasswordField1(javax.swing.JPasswordField jPasswordField1) {
+		this.jPasswordField1 = jPasswordField1;
+	}
+
+	public javax.swing.JTextField getjTextField1() {
+		return jTextField1;
+	}
+
+	public void setjTextField1(javax.swing.JTextField jTextField1) {
+		this.jTextField1 = jTextField1;
+	}
+
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

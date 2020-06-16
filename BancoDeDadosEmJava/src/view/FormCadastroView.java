@@ -7,6 +7,7 @@ package view;
 
 import DAO.Conexao;
 import DAO.UsuarioDAO;
+import controller.FormCadastroController;
 import model.Usuario;
 
 import java.sql.Connection;
@@ -23,11 +24,13 @@ import javax.swing.JOptionPane;
  */
 public class FormCadastroView extends javax.swing.JFrame {
 
-    /**
+    private FormCadastroController controller;
+	/**
      * Creates new form CadastroView
      */
     public FormCadastroView() {
         initComponents();
+        controller = new FormCadastroController(this);
     }
 
     /**
@@ -120,24 +123,7 @@ public class FormCadastroView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
   
-    String nome = jTextField2.getText();
-    String senha = jTextField3.getText();
-    
-    	
-    Usuario usuario = new Usuario(nome,senha);
-    
-    try {
-		Connection conexao = new Conexao().getConnection();
-		 UsuarioDAO usuariodao = new UsuarioDAO(conexao); 
-		   usuariodao.insert(usuario);
-		   
-		   JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!!!");
-		   
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    
+  controller.cadastraUsuario();
     ;
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -176,8 +162,36 @@ public class FormCadastroView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField getjTextField1() {
+		return jTextField1;
+	}
+
+	public void setjTextField1(javax.swing.JTextField jTextField1) {
+		this.jTextField1 = jTextField1;
+	}
+
+	public javax.swing.JTextField getjTextField2() {
+		return jTextField2;
+	}
+
+	public void setjTextField2(javax.swing.JTextField jTextField2) {
+		this.jTextField2 = jTextField2;
+	}
+
+	public javax.swing.JTextField getjTextField3() {
+		return jTextField3;
+	}
+
+	public void setjTextField3(javax.swing.JTextField jTextField3) {
+		this.jTextField3 = jTextField3;
+	}
+
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
